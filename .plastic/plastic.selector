@@ -1,0 +1,4 @@
+repository "Project 5 – Mechanic Progression 2026-11-09_22-22-58/Project 5 – Mechanic Progression@1375777161924@cloud"
+  path "/"
+    br "/main"
+    co "/main"
