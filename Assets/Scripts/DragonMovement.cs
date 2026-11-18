@@ -1,4 +1,5 @@
 using Unity.VisualScripting;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,40 +7,58 @@ public class DragonMovement : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] float moveSpeed = 10f;
-    [SerializeField] float flySpeed = 20f;
-    public bool isFlying;
-    public bool isGrounded;
+    public bool isFlying = false;
+    public bool isGrounded
+    {
+        get {  return !isFlying; }
+    }
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        isGrounded = true;
     }
 
     void FixedUpdate()
     {
         rb.linearVelocity = moveInput * moveSpeed;
+        //debug log check
+        if (isGrounded)
+        {
+            Debug.Log("Player is grounded");
+        }
+
+        if (isFlying)
+        {
+            Debug.Log("Player is flying");
+        }
     }
+
+    void Update()
+    {
+        if (isFlying)
+        {
+            moveSpeed = 20f;
+        }
+
+       if (isGrounded)
+        {
+            moveSpeed = 10f;
+        }
+    }
+
+    public void OnFly()
+    {
+        isFlying = !isFlying;
+    }
+
 
     public void Move(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
     }
 
-    public void Flight()
-    {
-        if (isFlying) { }
-    }
-
-    public void Grounded()
-    {
-        if (isGrounded)
-        {
-
-        }
-    }
 }
 
 
