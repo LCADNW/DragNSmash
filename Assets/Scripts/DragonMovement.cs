@@ -26,12 +26,12 @@ public class DragonMovement : MonoBehaviour
         //debug log check
         if (isGrounded)
         {
-            Debug.Log("Player is grounded");
+            
         }
 
         if (isFlying)
         {
-            Debug.Log("Player is flying");
+            
         }
     }
 
